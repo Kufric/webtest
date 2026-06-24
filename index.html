@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>kufr — creativity, marketing, social media</title>
+<title>kufr</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,600&family=UnifrakturMaguntia&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -245,7 +245,7 @@
     max-width:340px;
   }
 
-  /* NEW: nicer layout for embeds */
+  /* layout for local video embeds */
   .card-social .social-main{
     display:grid;
     grid-template-columns:1fr 380px;
@@ -255,17 +255,12 @@
   }
   .card-social .social-left{min-width:0;}
   .card-social .social-embeds{display:flex;flex-direction:column;gap:18px;align-items:stretch;}
-  .card-social .embed{
-    background:transparent;
-    border-radius:12px;
-    overflow:hidden;
-    border:1px solid rgba(255,255,255,.04);
-  }
+  .card-social .embed{background:transparent;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.04);}
   .card-social .embed.reel{height:360px;}
   .card-social .embed.post{height:220px;}
-  .card-social .embed iframe{width:100%;height:100%;border:0;display:block;}
+  .card-social .embed video, .card-social .embed img{width:100%;height:100%;object-fit:cover;display:block;}
 
-  /* hide old placeholder visuals (if any remain) */
+  /* fallback old placeholders */
   .ph-box{background:#2a2a2a;border-radius:14px;border:1px solid rgba(255,255,255,.05);}
 
   .card-social .tag{background:rgba(168,123,255,.15);color:var(--purple-soft);} 
@@ -439,7 +434,7 @@
     <article class="card card-social">
       <div class="handle">@parasocialni</div>
 
-      <!-- Social main now uses a two-column layout: left = text & tags, right = embeds -->
+      <!-- Social main: left = description/tags, right = local muted videos linking to instagram -->
       <div class="social-main">
         <div class="social-left">
           <p>Daily news from Twitch &amp; Kick.<br>Best moments from CZ/SK streams.</p>
@@ -453,23 +448,17 @@
           </div>
         </div>
 
-        <div class="social-embeds" aria-hidden="false">
+        <div class="social-embeds">
           <div class="embed reel" title="Instagram reel">
-            <iframe
-              src="https://www.instagram.com/reel/DZ49Q2SqG70/embed"
-              loading="lazy"
-              allowfullscreen
-              referrerpolicy="no-referrer-when-downgrade"
-            ></iframe>
+            <a href="https://www.instagram.com/reel/DZ49Q2SqG70/" target="_blank" rel="noopener" aria-label="Open reel on Instagram">
+              <video src="/Reel.mp4" muted autoplay loop playsinline preload="metadata" tabindex="-1" aria-hidden="true"></video>
+            </a>
           </div>
 
           <div class="embed post" title="Instagram post">
-            <iframe
-              src="https://www.instagram.com/p/DYzmiAclzbI/embed?img_index=1"
-              loading="lazy"
-              allowfullscreen
-              referrerpolicy="no-referrer-when-downgrade"
-            ></iframe>
+            <a href="https://www.instagram.com/p/DYzmiAclzbI/?img_index=1" target="_blank" rel="noopener" aria-label="Open post on Instagram">
+              <video src="/Post.mp4" muted loop playsinline preload="metadata" tabindex="-1" aria-hidden="true"></video>
+            </a>
           </div>
         </div>
       </div>
@@ -547,7 +536,6 @@
 
 <footer>© kufr — built with care</footer>
 
-<!-- Instagram embed script -->
 <script async defer src="https://www.instagram.com/embed.js"></script>
 </body>
 </html>
