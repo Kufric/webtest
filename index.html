@@ -242,26 +242,35 @@
     font-weight:600;
     color:#e7e7e7;
     line-height:1.5;
-    max-width:340px;
+    max-width:420px;
   }
 
-  /* layout for local video embeds */
+  /* NEW layout that matches the scheme: left column = description + post + tags; right column = tall reel */
   .card-social .social-main{
     display:grid;
-    grid-template-columns:1fr 380px;
+    grid-template-columns:1fr 420px;
     gap:28px;
     align-items:start;
     margin-top:26px;
   }
-  .card-social .social-left{min-width:0;}
-  .card-social .social-embeds{display:flex;flex-direction:column;gap:18px;align-items:stretch;}
-  .card-social .embed{background:transparent;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.04);}
-  .card-social .embed.reel{height:360px;}
-  .card-social .embed.post{height:220px;}
+  .card-social .social-left{
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    min-height:420px;
+  }
+  .card-social .social-left .top{margin-bottom:18px;}
+  .card-social .post-area{display:flex;align-items:center;justify-content:flex-start;padding-top:10px;padding-bottom:10px}
+  .card-social .social-right{display:flex;align-items:flex-start;justify-content:center}
+
+  .card-social .social-embeds{display:flex;flex-direction:column;gap:18px;align-items:stretch;width:100%;}
+  .card-social .embed{background:transparent;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.04);}
+  .card-social .embed.post{height:420px;width:100%;}
+  .card-social .embed.reel{height:560px;width:100%;}
   .card-social .embed video, .card-social .embed img{width:100%;height:100%;object-fit:cover;display:block;}
 
-  /* fallback old placeholders */
-  .ph-box{background:#2a2a2a;border-radius:14px;border:1px solid rgba(255,255,255,.05);}
+  /* keep tags aligned bottom-left */
+  .card-social .tag-row{margin-top:20px;}
 
   .card-social .tag{background:rgba(168,123,255,.15);color:var(--purple-soft);} 
   .palm{
@@ -272,11 +281,16 @@
     opacity:.9;
     pointer-events:none;
   }
+  @media (max-width:1100px){
+    .card-social .social-main{grid-template-columns:1fr 360px;}
+    .card-social .embed.reel{height:480px;}
+  }
   @media (max-width:900px){
     .card-social .social-main{grid-template-columns:1fr;}
-    .card-social .social-embeds{order:2;}
-    .card-social p{max-width:none;}
-    .card-social .social-embeds .embed.reel{height:300px;}
+    .card-social .social-right{order:2}
+    .card-social .social-left{order:1}
+    .card-social .embed.post{height:300px}
+    .card-social .embed.reel{height:340px}
   }
   @media (max-width:560px){ .palm{display:none;} }
 
@@ -434,30 +448,36 @@
     <article class="card card-social">
       <div class="handle">@parasocialni</div>
 
-      <!-- Social main: left = description/tags, right = local muted videos linking to instagram -->
+      <!-- Social main: left = description + post + tags; right = tall reel -->
       <div class="social-main">
         <div class="social-left">
-          <p>Daily news from Twitch &amp; Kick.<br>Best moments from CZ/SK streams.</p>
+          <div class="top">
+            <p>Daily news from Twitch &amp; Kick.<br>Best moments from CZ/SK streams.</p>
+          </div>
 
-          <div class="tag-row" style="margin-top:18px;">
-            <span class="tag">News</span>
-            <span class="tag">Influencers</span>
-            <span class="tag">Social Media</span>
-            <span class="tag">Copywriting</span>
-            <span class="tag">Video Edit</span>
+          <div class="post-area">
+            <div class="embed post" title="Instagram post">
+              <a href="https://www.instagram.com/p/DYzmiAclzbI/?img_index=1" target="_blank" rel="noopener" aria-label="Open post on Instagram">
+                <video src="/Post.mp4" muted loop playsinline preload="metadata" tabindex="-1" aria-hidden="true"></video>
+              </a>
+            </div>
+          </div>
+
+          <div class="bottom">
+            <div class="tag-row">
+              <span class="tag">News</span>
+              <span class="tag">Influencers</span>
+              <span class="tag">Social Media</span>
+              <span class="tag">Copywriting</span>
+              <span class="tag">Video Edit</span>
+            </div>
           </div>
         </div>
 
-        <div class="social-embeds">
+        <div class="social-right">
           <div class="embed reel" title="Instagram reel">
             <a href="https://www.instagram.com/reel/DZ49Q2SqG70/" target="_blank" rel="noopener" aria-label="Open reel on Instagram">
               <video src="/Reel.mp4" muted autoplay loop playsinline preload="metadata" tabindex="-1" aria-hidden="true"></video>
-            </a>
-          </div>
-
-          <div class="embed post" title="Instagram post">
-            <a href="https://www.instagram.com/p/DYzmiAclzbI/?img_index=1" target="_blank" rel="noopener" aria-label="Open post on Instagram">
-              <video src="/Post.mp4" muted loop playsinline preload="metadata" tabindex="-1" aria-hidden="true"></video>
             </a>
           </div>
         </div>
