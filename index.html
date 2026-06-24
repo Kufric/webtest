@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>kufr</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,600&family=UnifrakturMaguntia&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,500;0,700;0,900;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#161616;
@@ -29,7 +30,7 @@
   body{
     background:var(--bg);
     color:var(--text);
-    font-family:'Inter',sans-serif;
+    font-family:'Plus Jakarta Sans',sans-serif;
     overflow-x:hidden;
     -webkit-font-smoothing:antialiased;
   }
@@ -71,7 +72,7 @@
     transform:translateY(-50%);
     display:flex;
     white-space:nowrap;
-    font-family:'Playfair Display',serif;
+    font-family:'Instrument Serif',serif;
     font-weight:700;
     font-style:italic;
     font-size:64px;
@@ -90,7 +91,7 @@
   .glitch-title{
     position:relative;
     text-align:center;
-    font-family:'Playfair Display',serif;
+    font-family:'Instrument Serif',serif;
     font-weight:900;
     font-size:clamp(54px,9vw,108px);
     letter-spacing:1px;
@@ -136,9 +137,10 @@
     flex-wrap:wrap;
     gap:36px;
     padding:34px 24px 0;
-    font-family:'Playfair Display',serif;
+    font-family:'Plus Jakarta Sans',sans-serif;
     font-size:18px;
     color:var(--text-muted);
+    letter-spacing:1px;
   }
   nav a{transition:color .2s;}
   nav a:hover, nav a:focus-visible{color:var(--text);} 
@@ -151,25 +153,56 @@
     padding:0 24px;
     display:grid;
     grid-template-columns:1fr 1fr;
-    align-items:center;
-    gap:24px;
+    align-items:start;
+    gap:0;
+    min-height:360px;
   }
   .intro-card{
-    background:#101010;
-    border:1px solid #2a2a2a;
-    border-radius:14px;
-    padding:22px 26px;
+    position:relative;
+    z-index:1;
+    background:rgba(16,16,16,0.45);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:18px;
+    padding:24px 28px;
     font-size:15px;
     line-height:1.55;
-    color:#dcdcdc;
+    color:#f1f1f1;
     max-width:380px;
-    box-shadow:0 12px 30px -10px rgba(0,0,0,.6);
+    box-shadow:0 28px 80px rgba(0,0,0,.25);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
   }
   .intro-card b{color:#fff;}
-  .intro-card.bottom{justify-self:end;}
-  .star-wrap{display:flex;align-items:center;justify-content:center;}
-  .star-wrap svg{width:100%;max-width:280px;height:auto;}
-  .star-wrap img{width:100%;max-width:280px;height:auto;}
+  .intro-card.top{
+    grid-column:1 / 2;
+    justify-self:end;
+  }
+  .intro-card.bottom{
+    grid-column:2 / 3;
+    justify-self:start;
+    align-self:end;
+  }
+  .star-wrap{
+    position:absolute;
+    z-index:0;
+    width:280px;
+    pointer-events:none;
+  }
+  .star-wrap.first{
+    top:-11%;
+    right:12%;
+    width:300px;
+  }
+  .star-wrap.second{
+    bottom:-11%;
+    left:12%;
+    width:300px;
+  }
+  .star-wrap img{
+    width:100%;
+    height:auto;
+    display:block;
+  }
 
   @media (max-width:760px){
     .intro{grid-template-columns:1fr;}
@@ -183,16 +216,13 @@
   /* ===== PROJECTS HEADING ===== */
   .projects-title{
     text-align:center;
-    font-family:'Playfair Display',serif;
+    font-family:'Instrument Serif',serif;
     font-weight:700;
     text-transform:uppercase;
     letter-spacing:10px;
     font-size:clamp(36px,6vw,58px);
     margin:10px 0 56px;
-    background:linear-gradient(180deg,#fdfdfd 0%, #9a9a9a 45%, #efefef 55%, #6b6b6b 100%);
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
+    color:#ffffff;
     filter:drop-shadow(0 2px 6px rgba(0,0,0,.6));
   }
 
@@ -230,11 +260,19 @@
     overflow:visible;
   }
   .card-social .handle{
-    font-family:'Playfair Display',serif;
+    font-family:'Plus Jakarta Sans',sans-serif;
     font-style:italic;
     font-weight:600;
-    font-size:26px;
+    font-size:34px;
+    line-height:1.05;
+  }
+  .card-social .handle a{
     color:#fff;
+    text-decoration:none;
+  }
+  .card-social .handle a:hover,
+  .card-social .handle a:focus-visible{
+    text-decoration:underline;
   }
   .card-social .description{
     margin-top:10px;
@@ -243,6 +281,10 @@
     color:#e7e7e7;
     line-height:1.5;
     max-width:340px;
+  }
+  .card-social .left-col{
+    align-items:flex-start;
+    justify-content:flex-start;
   }
   .placeholder-row{
     display:flex;
@@ -274,33 +316,30 @@
   @media (max-width:560px){ .palm{display:none;} }
 
   /* Layout: header row with handle + description, then videos side by side */
-  .card-social .header-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    gap:40px;
-    margin-bottom:24px;
-  }
-
   .card-social .header-text{
-    flex:1;
     min-width:0;
   }
 
   .card-social .social-main{
+    display:grid;
+    grid-template-columns:1.25fr 0.85fr;
+    gap:18px;
+    align-items:start;
+    margin-top:18px;
+  }
+
+  .card-social .left-col{
     display:flex;
-    justify-content:flex-start;
+    flex-direction:column;
     gap:24px;
-    align-items:flex-start;
-    margin-top:24px;
-    flex-wrap:wrap;
   }
 
   .card-social .video-col{
     display:flex;
     flex-direction:column;
-    align-items:center;
+    align-items:flex-start;
     gap:10px;
+    width:100%;
   }
 
   .card-social .example-label{
@@ -309,7 +348,7 @@
     letter-spacing:1px;
     text-transform:uppercase;
     color:#cfcfcf;
-    text-align:center;
+    text-align:left;
     margin-bottom:8px;
     width:100%;
   }
@@ -326,15 +365,19 @@
   /* 60% smaller: multiply by 0.4 */
   .card-social .embed.post{
     width:100%;
-    max-width:192px;
+    max-width:230px;
     aspect-ratio: 4/5;
     border-radius:14px;
     background:#1f1f1f;
   }
 
+  .card-social .video-col.post-col{
+    margin-left:150px;
+  }
+
   .card-social .embed.reel{
     width:100%;
-    max-width:200px;
+    max-width:230px;
     aspect-ratio: 9/16;
     border-radius:14px;
     background:#1f1f1f;
@@ -352,20 +395,19 @@
 
   @media (max-width:1400px){
     .card-social .social-main{ gap:20px; }
-    .card-social .header-row{ gap:30px; }
   }
 
   @media (max-width:1100px){
     .card-social .social-main{ gap:18px; }
-    .card-social .header-row{ gap:24px; }
   }
 
   @media (max-width:900px){
-    .card-social .header-row{
+    .card-social .social-main{
+      display:flex;
       flex-direction:column;
       gap:16px;
     }
-    .card-social .social-main{ gap:16px; }
+    .card-social .left-col{gap:18px;}
   }
 
   /* --- Card 2: Graphic Design --- */
@@ -378,7 +420,7 @@
     margin-bottom:30px;
   }
   .graphic-title{
-    font-family:'UnifrakturMaguntia',serif;
+    font-family:'Instrument Serif',serif;
     font-size:clamp(32px,5vw,48px);
     color:var(--red-bright);
     text-shadow:0 0 10px rgba(212,69,58,.55), 2px 2px 0 #4a0d0d;
@@ -398,9 +440,19 @@
     grid-template-columns:repeat(3,1fr);
     gap:18px;
   }
+  .grid-6 img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:14px;
+    display:block;
+  }
   .grid-6 .ph-box{height:140px;width:100%;}
-  @media (max-width:600px){
+  @media (max-width:900px){
     .grid-6{grid-template-columns:repeat(2,1fr);} 
+  }
+  @media (max-width:600px){
+    .grid-6{grid-template-columns:1fr;} 
   }
   .card-graphic-footer{
     display:flex;
@@ -412,7 +464,7 @@
   }
   .card-graphic .tag{background:rgba(212,69,58,.15);color:#e98f86;border:1px solid rgba(212,69,58,.35);} 
   .see-more{
-    font-family:'Playfair Display',serif;
+    font-family:'Plus Jakarta Sans',sans-serif;
     font-style:italic;
     font-size:15px;
     color:var(--red-bright);
@@ -476,7 +528,7 @@
       <path d="M -50 120 C 250 60, 400 200, 600 140 S 850 90, 1050 170 S 1250 130, 1300 150" fill="none" stroke="var(--purple)" stroke-width="2.5" filter="url(#rough1)"/>
     </svg>
     <div class="glitch-row" aria-hidden="true">
-      <span>kufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufr</span>
+      <span>kufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufrkufr</span>
     </div>
     <h1 class="glitch-title">kufr</h1>
   </div>
@@ -493,14 +545,14 @@
     <div class="intro-card top">
       Twenty year old <b>Marketing</b> student at Charles University, passionate for connecting <b>design</b> and <b>communication</b>
     </div>
-    <div class="star-wrap" aria-hidden="true">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUgAAAEwCAYAAADVZeifAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAhG1JREFUe[...]
-    </div>
-    <div class="star-wrap" aria-hidden="true">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARUAAADuCAYAAAAXzJOMAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAbEpJREFUe[...]
-    </div>
     <div class="intro-card bottom">
       Currently exploring different ways to use <b>AI</b> for easier learning and better workflow, while enhancing the <b>quality</b> of final outputs.
+    </div>
+    <div class="star-wrap first" aria-hidden="true">
+      <img src="star1.png" alt="pink star decoration" />
+    </div>
+    <div class="star-wrap second" aria-hidden="true">
+      <img src="star2.png" alt="purple star decoration" />
     </div>
   </div>
 </header>
@@ -520,21 +572,20 @@
 
     <!-- CARD 1 -->
     <article class="card card-social">
-      <div class="header-row">
-        <div class="header-text">
-          <div class="handle">@parasocialni</div>
-          <p class="description">Daily news from Twitch & Kick.<br>Best moments from CZ/SK streams.</p>
-        </div>
-      </div>
-
-      <!-- Social main: post and reel side by side -->
       <div class="social-main">
-        <div class="video-col">
-          <div class="example-label">POST EXAMPLE</div>
-          <div class="embed post">
-            <a href="https://www.instagram.com/p/DYzmiAclzbI/?img_index=1" target="_blank" rel="noopener" aria-label="Open post on Instagram">
-              <video src="/Post.mp4" muted loop playsinline preload="metadata" tabindex="-1" aria-hidden="true"></video>
-            </a>
+        <div class="left-col">
+          <div class="header-text">
+            <div class="handle"><a href="https://www.instagram.com/parasocialni/" target="_blank" rel="noopener">@parasocialni</a></div>
+            <p class="description">Daily news from Twitch & Kick.<br>Best moments from CZ/SK streams.</p>
+          </div>
+
+          <div class="video-col post-col">
+            <div class="example-label">POST EXAMPLE</div>
+            <div class="embed post">
+              <a href="https://www.instagram.com/p/DYzmiAclzbI/?img_index=1" target="_blank" rel="noopener" aria-label="Open post on Instagram">
+                <video src="Post.mp4" muted autoplay loop playsinline preload="metadata" tabindex="-1" aria-hidden="true"></video>
+              </a>
+            </div>
           </div>
         </div>
 
@@ -542,7 +593,7 @@
           <div class="example-label">REEL EXAMPLE</div>
           <div class="embed reel">
             <a href="https://www.instagram.com/reel/DZ49Q2SqG70/" target="_blank" rel="noopener" aria-label="Open reel on Instagram">
-              <video src="/Reel.mp4" muted autoplay loop playsinline preload="metadata" tabindex="-1" aria-hidden="true"></video>
+              <video src="Reel.mp4" muted autoplay loop playsinline preload="metadata" tabindex="-1" aria-hidden="true"></video>
             </a>
           </div>
         </div>
@@ -581,8 +632,12 @@
       </div>
 
       <div class="grid-6">
-        <div class="ph-box"></div><div class="ph-box"></div><div class="ph-box"></div>
-        <div class="ph-box"></div><div class="ph-box"></div><div class="ph-box"></div>
+        <img src="Graphic design/BLADEE.png" alt="BLADEE graphic design" />
+        <img src="Graphic design/cyberlove 3.png" alt="Cyberlove 3 graphic design" />
+        <img src="Graphic design/imperfect.png" alt="Imperfect graphic design" />
+        <img src="Graphic design/KUFR logo FINAL 2.png" alt="KUFR logo graphic design" />
+        <img src="Graphic design/ROT logo.png" alt="ROT logo graphic design" />
+        <img src="Graphic design/rot poster.png" alt="rot poster graphic design" />
       </div>
 
       <div class="card-graphic-footer">
@@ -591,7 +646,7 @@
           <span class="tag">Art</span>
           <span class="tag">Affinity</span>
         </div>
-        <a href="#" class="see-more">see more</a>
+        <a href="https://www.instagram.com/y4kufr/" target="_blank" rel="noopener" class="see-more">see more</a>
       </div>
     </article>
 
