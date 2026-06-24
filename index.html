@@ -245,10 +245,10 @@
     max-width:420px;
   }
 
-  /* NEW layout that matches the scheme: left column = description + post + tags; right column = tall reel */
+  /* NEW layout: keep ratio, no crop (contain), and make a bit smaller */
   .card-social .social-main{
     display:grid;
-    grid-template-columns:1fr minmax(300px,44%);
+    grid-template-columns:1fr minmax(280px,40%);
     gap:28px;
     align-items:start;
     margin-top:26px;
@@ -257,34 +257,35 @@
     display:flex;
     flex-direction:column;
     justify-content:space-between;
-    min-height:auto;
   }
-  .card-social .social-left .top{margin-bottom:18px;}
-  .card-social .post-area{display:flex;align-items:center;justify-content:flex-start;padding-top:10px;padding-bottom:10px}
+  .card-social .post-area{display:flex;flex-direction:column;gap:10px;padding-top:10px;padding-bottom:10px}
   .card-social .social-right{display:flex;align-items:flex-start;justify-content:center}
 
-  .card-social .social-embeds{display:flex;flex-direction:column;gap:18px;align-items:stretch;width:100%;}
-  .card-social .embed{background:transparent;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.04);background:#222;}
+  .card-social .embed{background:transparent;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.04);background:#222;display:block}
 
-  /* Use aspect-ratio so media use their native proportions (post 4:5, reel 9:16) and scale down with max sizes */
+  /* use contain so videos are not cropped, keep native ratios but scale down */
   .card-social .embed.post{
     width:100%;
     aspect-ratio:4/5; /* 1080x1350 */
-    max-width:720px; /* scale down if container is narrow */
-    border-radius:16px;
+    max-width:480px; /* a little smaller */
+    border-radius:14px;
+    background:#1f1f1f;
   }
   .card-social .embed.reel{
     width:100%;
     aspect-ratio:9/16; /* 1080x1920 */
-    max-height:900px; /* ensure it doesn't overflow viewport too much */
-    border-radius:16px;
+    max-height:620px; /* a bit smaller */
+    border-radius:14px;
+    background:#1f1f1f;
   }
-  .card-social .embed video, .card-social .embed img{width:100%;height:100%;object-fit:cover;display:block;}
+  .card-social .embed video, .card-social .embed img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;background:#111}
+
+  .card-social .example-label{font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#cfcfcf;text-align:center;margin-bottom:8px}
 
   /* keep tags aligned bottom-left */
   .card-social .tag-row{margin-top:20px;}
-
   .card-social .tag{background:rgba(168,123,255,.15);color:var(--purple-soft);} 
+
   .palm{
     position:absolute;
     right:-34px;
@@ -294,21 +295,21 @@
     pointer-events:none;
   }
   @media (max-width:1400px){
-    .card-social .social-main{grid-template-columns:1fr minmax(260px,42%);} 
-    .card-social .embed.reel{max-height:720px;}
-    .card-social .embed.post{max-width:600px;}
+    .card-social .social-main{grid-template-columns:1fr minmax(240px,38%);} 
+    .card-social .embed.reel{max-height:560px;}
+    .card-social .embed.post{max-width:440px;}
   }
   @media (max-width:1100px){
     .card-social .social-main{grid-template-columns:1fr 360px;}
-    .card-social .embed.reel{height:auto;max-height:580px;}
-    .card-social .embed.post{max-width:520px;}
+    .card-social .embed.reel{height:auto;max-height:520px;}
+    .card-social .embed.post{max-width:380px;}
   }
   @media (max-width:900px){
     .card-social .social-main{grid-template-columns:1fr;}
     .card-social .social-right{order:2}
     .card-social .social-left{order:1}
-    .card-social .embed.post{height:300px}
-    .card-social .embed.reel{height:340px}
+    .card-social .embed.post{height:300px;aspect-ratio:4/5}
+    .card-social .embed.reel{height:340px;aspect-ratio:9/16}
   }
   @media (max-width:560px){ .palm{display:none;} }
 
@@ -474,9 +475,10 @@
           </div>
 
           <div class="post-area">
+            <div class="example-label">POST EXAMPLE</div>
             <div class="embed post" title="Instagram post">
               <a href="https://www.instagram.com/p/DYzmiAclzbI/?img_index=1" target="_blank" rel="noopener" aria-label="Open post on Instagram">
-                <video src="/Post.mp4" muted loop playsinline preload="metadata" tabindex="-1" aria-hidden="true"></video>
+                <video src="/Post.mp4" muted autoplay loop playsinline preload="metadata" tabindex="-1" aria-hidden="true"></video>
               </a>
             </div>
           </div>
@@ -493,6 +495,7 @@
         </div>
 
         <div class="social-right">
+          <div class="example-label">REEL EXAMPLE</div>
           <div class="embed reel" title="Instagram reel">
             <a href="https://www.instagram.com/reel/DZ49Q2SqG70/" target="_blank" rel="noopener" aria-label="Open reel on Instagram">
               <video src="/Reel.mp4" muted autoplay loop playsinline preload="metadata" tabindex="-1" aria-hidden="true"></video>
