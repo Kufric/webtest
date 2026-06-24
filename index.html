@@ -236,7 +236,7 @@
     font-size:26px;
     color:#fff;
   }
-  .card-social p{
+  .card-social .description{
     margin-top:10px;
     font-size:14px;
     font-weight:600;
@@ -273,13 +273,26 @@
   }
   @media (max-width:560px){ .palm{display:none;} }
 
-  /* New layout: center videos side by side, 60% smaller */
+  /* Layout: header row with handle + description, then videos side by side */
+  .card-social .header-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:40px;
+    margin-bottom:24px;
+  }
+
+  .card-social .header-text{
+    flex:1;
+    min-width:0;
+  }
+
   .card-social .social-main{
     display:flex;
-    justify-content:center;
+    justify-content:flex-start;
     gap:24px;
     align-items:flex-start;
-    margin-top:34px;
+    margin-top:24px;
     flex-wrap:wrap;
   }
 
@@ -313,7 +326,7 @@
   /* 60% smaller: multiply by 0.4 */
   .card-social .embed.post{
     width:100%;
-    max-width:192px; /* 480 * 0.4 */
+    max-width:192px;
     aspect-ratio: 4/5;
     border-radius:14px;
     background:#1f1f1f;
@@ -321,7 +334,7 @@
 
   .card-social .embed.reel{
     width:100%;
-    max-width:200px; /* 500 * 0.4 */
+    max-width:200px;
     aspect-ratio: 9/16;
     border-radius:14px;
     background:#1f1f1f;
@@ -339,20 +352,20 @@
 
   @media (max-width:1400px){
     .card-social .social-main{ gap:20px; }
-    .card-social .embed.post{ max-width:176px; }
-    .card-social .embed.reel{ max-width:184px; }
+    .card-social .header-row{ gap:30px; }
   }
 
   @media (max-width:1100px){
     .card-social .social-main{ gap:18px; }
-    .card-social .embed.post{ max-width:152px; }
-    .card-social .embed.reel{ max-width:160px; }
+    .card-social .header-row{ gap:24px; }
   }
 
   @media (max-width:900px){
+    .card-social .header-row{
+      flex-direction:column;
+      gap:16px;
+    }
     .card-social .social-main{ gap:16px; }
-    .card-social .embed.post{ max-width:152px; }
-    .card-social .embed.reel{ max-width:160px; }
   }
 
   /* --- Card 2: Graphic Design --- */
@@ -507,24 +520,29 @@
 
     <!-- CARD 1 -->
     <article class="card card-social">
-      <div class="handle">@parasocialni</div>
-
-      <!-- Social main: left = description + post + tags; right = tall reel -->
-      <div class="social-main">
-        <div class="video-col">
-          <div class="example-label">REEL EXAMPLE</div>
-          <div class="embed reel">
-            <a href="https://www.instagram.com/reel/DZ49Q2SqG70/" target="_blank" rel="noopener" aria-label="Open reel on Instagram">
-              <video src="/Reel.mp4" muted autoplay loop playsinline preload="metadata" tabindex="-1" aria-hidden="true"></video>
-            </a>
-          </div>
+      <div class="header-row">
+        <div class="header-text">
+          <div class="handle">@parasocialni</div>
+          <p class="description">Daily news from Twitch & Kick.<br>Best moments from CZ/SK streams.</p>
         </div>
+      </div>
 
+      <!-- Social main: post and reel side by side -->
+      <div class="social-main">
         <div class="video-col">
           <div class="example-label">POST EXAMPLE</div>
           <div class="embed post">
             <a href="https://www.instagram.com/p/DYzmiAclzbI/?img_index=1" target="_blank" rel="noopener" aria-label="Open post on Instagram">
               <video src="/Post.mp4" muted loop playsinline preload="metadata" tabindex="-1" aria-hidden="true"></video>
+            </a>
+          </div>
+        </div>
+
+        <div class="video-col">
+          <div class="example-label">REEL EXAMPLE</div>
+          <div class="embed reel">
+            <a href="https://www.instagram.com/reel/DZ49Q2SqG70/" target="_blank" rel="noopener" aria-label="Open reel on Instagram">
+              <video src="/Reel.mp4" muted autoplay loop playsinline preload="metadata" tabindex="-1" aria-hidden="true"></video>
             </a>
           </div>
         </div>
