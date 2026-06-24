@@ -328,11 +328,14 @@
     background:#1f1f1f;
   }
 
-  .card-social .embed iframe{
+  /* video styles for local MP4s */
+  .card-social .embed video,
+  .card-social .embed img{
     width:100%;
     height:100%;
+    object-fit:cover;
     display:block;
-    border:0;
+    background:#111;
   }
 
   @media (max-width:1400px){
@@ -507,31 +510,24 @@
     <!-- CARD 1 -->
     <article class="card card-social">
       <div class="handle">@parasocialni</div>
-      <p>Daily news from Twitch &amp; Kick.<br>Best moments from CZ/SK streams.</p>
 
-      <!-- new centered side-by-side layout for embeds -->
+      <!-- Social main: left = description + post + tags; right = tall reel -->
       <div class="social-main">
         <div class="video-col">
           <div class="example-label">REEL EXAMPLE</div>
-          <div class="embed reel ph-box">
-            <iframe
-              src="https://www.instagram.com/reel/DZ49Q2SqG70/embed"
-              loading="lazy"
-              allowfullscreen
-              referrerpolicy="no-referrer-when-downgrade"
-            ></iframe>
+          <div class="embed reel">
+            <a href="https://www.instagram.com/reel/DZ49Q2SqG70/" target="_blank" rel="noopener" aria-label="Open reel on Instagram">
+              <video src="/Reel.mp4" muted autoplay loop playsinline preload="metadata" tabindex="-1" aria-hidden="true"></video>
+            </a>
           </div>
         </div>
 
         <div class="video-col">
           <div class="example-label">POST EXAMPLE</div>
-          <div class="embed post ph-box">
-            <iframe
-              src="https://www.instagram.com/p/DYzmiAclzbI/embed?img_index=1"
-              loading="lazy"
-              allowfullscreen
-              referrerpolicy="no-referrer-when-downgrade"
-            ></iframe>
+          <div class="embed post">
+            <a href="https://www.instagram.com/p/DYzmiAclzbI/?img_index=1" target="_blank" rel="noopener" aria-label="Open post on Instagram">
+              <video src="/Post.mp4" muted loop playsinline preload="metadata" tabindex="-1" aria-hidden="true"></video>
+            </a>
           </div>
         </div>
       </div>
