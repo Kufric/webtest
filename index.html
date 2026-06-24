@@ -273,11 +273,11 @@
   }
   @media (max-width:560px){ .palm{display:none;} }
 
-  /* New layout: center videos, 60px gap, keep post size, reel ~20px wider, labels centered */
+  /* New layout: center videos side by side, 60% smaller */
   .card-social .social-main{
     display:flex;
     justify-content:center;
-    gap:60px;
+    gap:24px;
     align-items:flex-start;
     margin-top:34px;
     flex-wrap:wrap;
@@ -310,20 +310,19 @@
     display: block;
   }
 
-  /* keep post size (max-width similar to common IG post) */
+  /* 60% smaller: multiply by 0.4 */
   .card-social .embed.post{
     width:100%;
-    max-width:480px; /* keep post size */
-    aspect-ratio: 4/5; /* typical 1080x1350 */
+    max-width:192px; /* 480 * 0.4 */
+    aspect-ratio: 4/5;
     border-radius:14px;
     background:#1f1f1f;
   }
 
-  /* reel roughly 20px wider */
   .card-social .embed.reel{
     width:100%;
-    max-width:500px; /* ~20px wider than post */
-    aspect-ratio: 9/16; /* typical vertical video */
+    max-width:200px; /* 500 * 0.4 */
+    aspect-ratio: 9/16;
     border-radius:14px;
     background:#1f1f1f;
   }
@@ -339,22 +338,21 @@
   }
 
   @media (max-width:1400px){
-    .card-social .social-main{ gap:48px; }
-    .card-social .embed.post{ max-width:440px; }
-    .card-social .embed.reel{ max-width:520px; }
+    .card-social .social-main{ gap:20px; }
+    .card-social .embed.post{ max-width:176px; }
+    .card-social .embed.reel{ max-width:184px; }
   }
 
   @media (max-width:1100px){
-    .card-social .social-main{ gap:36px; }
-    .card-social .embed.post{ max-width:380px; }
-    .card-social .embed.reel{ max-width:480px; }
+    .card-social .social-main{ gap:18px; }
+    .card-social .embed.post{ max-width:152px; }
+    .card-social .embed.reel{ max-width:160px; }
   }
 
   @media (max-width:900px){
-    /* stack on small screens */
-    .card-social .social-main{ flex-direction:column; gap:18px; }
-    .card-social .embed.post{ height:300px; aspect-ratio: 4/5; }
-    .card-social .embed.reel{ height:340px; aspect-ratio: 9/16; }
+    .card-social .social-main{ gap:16px; }
+    .card-social .embed.post{ max-width:152px; }
+    .card-social .embed.reel{ max-width:160px; }
   }
 
   /* --- Card 2: Graphic Design --- */
@@ -483,10 +481,10 @@
       Twenty year old <b>Marketing</b> student at Charles University, passionate for connecting <b>design</b> and <b>communication</b>
     </div>
     <div class="star-wrap" aria-hidden="true">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUgAAAEwCAYAAADVZeifAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAhG1JREFUe[...]" alt="star"/>
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUgAAAEwCAYAAADVZeifAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAhG1JREFUe[...]
     </div>
     <div class="star-wrap" aria-hidden="true">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARUAAADuCAYAAAAXzJOMAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAbEpJREFUe[...]" alt="star"/>
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARUAAADuCAYAAAAXzJOMAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAbEpJREFUe[...]
     </div>
     <div class="intro-card bottom">
       Currently exploring different ways to use <b>AI</b> for easier learning and better workflow, while enhancing the <b>quality</b> of final outputs.
@@ -582,7 +580,7 @@
     <!-- CARD 3 -->
     <article class="card card-rot">
       <div class="rot-top">
-        <img class="rot-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABDgAAAQ4CAYAAADsEGyPAAAFFmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZV[...]" alt="rot logo"/>
+        <img class="rot-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABDgAAAQ4CAYAAADsEGyPAAAFFmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZV[...]
         <p>Hats customized by hand, my own designs.</p>
       </div>
 
