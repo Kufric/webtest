@@ -242,50 +242,27 @@
     font-weight:600;
     color:#e7e7e7;
     line-height:1.5;
-    max-width:420px;
+    max-width:340px;
   }
-
-  /* NEW layout: keep ratio, no crop (contain), and make a bit smaller */
-  .card-social .social-main{
-    display:grid;
-    grid-template-columns:1fr minmax(280px,40%);
-    gap:28px;
-    align-items:start;
-    margin-top:26px;
-  }
-  .card-social .social-left{
+  .placeholder-row{
     display:flex;
-    flex-direction:column;
-    justify-content:space-between;
+    gap:22px;
+    margin-top:34px;
+    align-items:flex-end;
+    flex-wrap:wrap;
   }
-  .card-social .post-area{display:flex;flex-direction:column;gap:10px;padding-top:10px;padding-bottom:10px}
-  .card-social .social-right{display:flex;align-items:flex-start;justify-content:center}
-
-  .card-social .embed{background:transparent;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.04);background:#222;display:block}
-
-  /* use contain so videos are not cropped, keep native ratios but scale down */
-  .card-social .embed.post{
-    width:100%;
-    aspect-ratio:4/5; /* 1080x1350 */
-    max-width:480px; /* a little smaller */
+  .placeholder-col{display:flex;flex-direction:column;gap:10px;}
+  .placeholder-col span{
+    font-size:11px;font-weight:700;letter-spacing:1px;text-align:center;color:#cfcfcf;
+  }
+  .ph-box{
+    background:#2a2a2a;
     border-radius:14px;
-    background:#1f1f1f;
+    border:1px solid rgba(255,255,255,.05);
   }
-  .card-social .embed.reel{
-    width:100%;
-    aspect-ratio:9/16; /* 1080x1920 */
-    max-height:620px; /* a bit smaller */
-    border-radius:14px;
-    background:#1f1f1f;
-  }
-  .card-social .embed video, .card-social .embed img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;background:#111}
-
-  .card-social .example-label{font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#cfcfcf;text-align:center;margin-bottom:8px}
-
-  /* keep tags aligned bottom-left */
-  .card-social .tag-row{margin-top:20px;}
+  .ph-box.reel{width:170px;height:300px;}
+  .ph-box.post{width:190px;height:220px;}
   .card-social .tag{background:rgba(168,123,255,.15);color:var(--purple-soft);} 
-
   .palm{
     position:absolute;
     right:-34px;
@@ -294,24 +271,88 @@
     opacity:.9;
     pointer-events:none;
   }
-  @media (max-width:1400px){
-    .card-social .social-main{grid-template-columns:1fr minmax(240px,38%);} 
-    .card-social .embed.reel{max-height:560px;}
-    .card-social .embed.post{max-width:440px;}
-  }
-  @media (max-width:1100px){
-    .card-social .social-main{grid-template-columns:1fr 360px;}
-    .card-social .embed.reel{height:auto;max-height:520px;}
-    .card-social .embed.post{max-width:380px;}
-  }
-  @media (max-width:900px){
-    .card-social .social-main{grid-template-columns:1fr;}
-    .card-social .social-right{order:2}
-    .card-social .social-left{order:1}
-    .card-social .embed.post{height:300px;aspect-ratio:4/5}
-    .card-social .embed.reel{height:340px;aspect-ratio:9/16}
-  }
   @media (max-width:560px){ .palm{display:none;} }
+
+  /* New layout: center videos, 60px gap, keep post size, reel ~20px wider, labels centered */
+  .card-social .social-main{
+    display:flex;
+    justify-content:center;
+    gap:60px;
+    align-items:flex-start;
+    margin-top:34px;
+    flex-wrap:wrap;
+  }
+
+  .card-social .video-col{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+  }
+
+  .card-social .example-label{
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:#cfcfcf;
+    text-align:center;
+    margin-bottom:8px;
+    width:100%;
+  }
+
+  .card-social .embed{
+    background: transparent;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.04);
+    background: #222;
+    display: block;
+  }
+
+  /* keep post size (max-width similar to common IG post) */
+  .card-social .embed.post{
+    width:100%;
+    max-width:480px; /* keep post size */
+    aspect-ratio: 4/5; /* typical 1080x1350 */
+    border-radius:14px;
+    background:#1f1f1f;
+  }
+
+  /* reel roughly 20px wider */
+  .card-social .embed.reel{
+    width:100%;
+    max-width:500px; /* ~20px wider than post */
+    aspect-ratio: 9/16; /* typical vertical video */
+    border-radius:14px;
+    background:#1f1f1f;
+  }
+
+  .card-social .embed iframe{
+    width:100%;
+    height:100%;
+    display:block;
+    border:0;
+  }
+
+  @media (max-width:1400px){
+    .card-social .social-main{ gap:48px; }
+    .card-social .embed.post{ max-width:440px; }
+    .card-social .embed.reel{ max-width:520px; }
+  }
+
+  @media (max-width:1100px){
+    .card-social .social-main{ gap:36px; }
+    .card-social .embed.post{ max-width:380px; }
+    .card-social .embed.reel{ max-width:480px; }
+  }
+
+  @media (max-width:900px){
+    /* stack on small screens */
+    .card-social .social-main{ flex-direction:column; gap:18px; }
+    .card-social .embed.post{ height:300px; aspect-ratio: 4/5; }
+    .card-social .embed.reel{ height:340px; aspect-ratio: 9/16; }
+  }
 
   /* --- Card 2: Graphic Design --- */
   .card-graphic{
@@ -393,7 +434,7 @@
   .rot-row-2{display:grid;grid-template-columns:1fr 1.4fr;gap:18px;}
   .rot-grid .ph-box{background:#332323;}
   @media (max-width:640px){
-    .rot-grid{grid-template-columns:1fr;}
+    .rot-grid{grid-template-columns:1fr;} 
   }
   .rot-footer{
     display:flex;
@@ -439,10 +480,10 @@
       Twenty year old <b>Marketing</b> student at Charles University, passionate for connecting <b>design</b> and <b>communication</b>
     </div>
     <div class="star-wrap" aria-hidden="true">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUgAAAEwCAYAAADVZeifAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAhG1JREFUe[...]
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUgAAAEwCAYAAADVZeifAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAhG1JREFUe[...]" alt="star"/>
     </div>
     <div class="star-wrap" aria-hidden="true">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARUAAADuCAYAAAAXzJOMAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAbEpJREFUe[...]
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARUAAADuCAYAAAAXzJOMAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAbEpJREFUe[...]" alt="star"/>
     </div>
     <div class="intro-card bottom">
       Currently exploring different ways to use <b>AI</b> for easier learning and better workflow, while enhancing the <b>quality</b> of final outputs.
@@ -466,42 +507,41 @@
     <!-- CARD 1 -->
     <article class="card card-social">
       <div class="handle">@parasocialni</div>
+      <p>Daily news from Twitch &amp; Kick.<br>Best moments from CZ/SK streams.</p>
 
-      <!-- Social main: left = description + post + tags; right = tall reel -->
+      <!-- new centered side-by-side layout for embeds -->
       <div class="social-main">
-        <div class="social-left">
-          <div class="top">
-            <p>Daily news from Twitch &amp; Kick.<br>Best moments from CZ/SK streams.</p>
-          </div>
-
-          <div class="post-area">
-            <div class="example-label">POST EXAMPLE</div>
-            <div class="embed post" title="Instagram post">
-              <a href="https://www.instagram.com/p/DYzmiAclzbI/?img_index=1" target="_blank" rel="noopener" aria-label="Open post on Instagram">
-                <video src="/Post.mp4" muted autoplay loop playsinline preload="metadata" tabindex="-1" aria-hidden="true"></video>
-              </a>
-            </div>
-          </div>
-
-          <div class="bottom">
-            <div class="tag-row">
-              <span class="tag">News</span>
-              <span class="tag">Influencers</span>
-              <span class="tag">Social Media</span>
-              <span class="tag">Copywriting</span>
-              <span class="tag">Video Edit</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="social-right">
+        <div class="video-col">
           <div class="example-label">REEL EXAMPLE</div>
-          <div class="embed reel" title="Instagram reel">
-            <a href="https://www.instagram.com/reel/DZ49Q2SqG70/" target="_blank" rel="noopener" aria-label="Open reel on Instagram">
-              <video src="/Reel.mp4" muted autoplay loop playsinline preload="metadata" tabindex="-1" aria-hidden="true"></video>
-            </a>
+          <div class="embed reel ph-box">
+            <iframe
+              src="https://www.instagram.com/reel/DZ49Q2SqG70/embed"
+              loading="lazy"
+              allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
         </div>
+
+        <div class="video-col">
+          <div class="example-label">POST EXAMPLE</div>
+          <div class="embed post ph-box">
+            <iframe
+              src="https://www.instagram.com/p/DYzmiAclzbI/embed?img_index=1"
+              loading="lazy"
+              allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="tag-row">
+        <span class="tag">News</span>
+        <span class="tag">Influencers</span>
+        <span class="tag">Social Media</span>
+        <span class="tag">Copywriting</span>
+        <span class="tag">Video Edit</span>
       </div>
 
       <svg class="palm" viewBox="0 0 120 170" aria-hidden="true">
@@ -546,7 +586,7 @@
     <!-- CARD 3 -->
     <article class="card card-rot">
       <div class="rot-top">
-        <img class="rot-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABDgAAAQ4CAYAAADsEGyPAAAFFmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZV[...]
+        <img class="rot-logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABDgAAAQ4CAYAAADsEGyPAAAFFmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZV[...]" alt="rot logo"/>
         <p>Hats customized by hand, my own designs.</p>
       </div>
 
@@ -576,7 +616,8 @@
 </main>
 
 <footer>© kufr — built with care</footer>
-
+        
 <script async defer src="https://www.instagram.com/embed.js"></script>
+        
 </body>
 </html>
